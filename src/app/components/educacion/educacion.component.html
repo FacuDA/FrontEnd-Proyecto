@@ -1,32 +1,33 @@
 <div class="row">
     <h1>Educacion</h1>
     <div class="col-lg-2">
-
-        <button type="button" class="btn btn-secondary" routerLink="/nuevaedu" *ngIf="isLogged">
-            Agregar Educación
-        </button>
+      <button type="button" class="btn btn-secondary" routerLink="/nuevaedu" *ngIf="isLogged && isAdmin">
+        Agregar Educación
+      </button>
     </div>
-
+  
     <div class="col lg 1"></div>
     <div class="col-lg-11">
-        <table class="table">
-            <tbody>
-                <tr *ngFor="let Educacion of educacion">
-                    <td>
-                        <h2>{{Educacion.nombreE}}</h2>
-                    </td>
-                    <td>{{Educacion.descripcionE}}</td>
-                    <td *ngIf="isLogged">
-                         <button class="btn btn-secondary" routerLink="/editedu/{{Educacion.id}}">
-                            <i class="bi bi-pencil-square"></i>  EDITAR</button>
-                        </td>
-                    <td *ngIf="isLogged">
-                        <button class="btn btn-danger" (click)="delete(Educacion.id)">
-                            <i class="bi bi-trash-fill"> </i>BORRAR </button></td>
-                </tr>
-            </tbody>
-        </table>
-
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let Educacion of educacion">
+            <td>
+              <h2>{{Educacion.nombreE}}</h2>
+            </td>
+            <td>{{Educacion.descripcionE}}</td>
+            <td *ngIf="isLogged && isAdmin">
+              <button class="btn btn-secondary" routerLink="/editedu/{{Educacion.id}}">
+                <i class="bi bi-pencil-square"></i> EDITAR
+              </button>
+            </td>
+            <td *ngIf="isLogged && isAdmin">
+              <button class="btn btn-danger" (click)="delete(Educacion.id)">
+                <i class="bi bi-trash-fill"></i> BORRAR
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-</div>
+  </div>
+  

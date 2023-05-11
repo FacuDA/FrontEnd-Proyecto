@@ -13,15 +13,25 @@ export class AcercaDeComponent implements OnInit{
 
   constructor(public personaService: PersonaService, private tokenService: TokenService) {}
 
-  isLogged= false
-  ngOnInit(): void{
-    this.cargarPersona();
-    if(this.tokenService.getToken()){
+  isLogged= false;
+  isAdmin = false; 
+
+  VerificarPermisos(): void {
+    if (this.tokenService.getToken()) {
+      const token = this.tokenService.getToken();
+      const roles = this.tokenService.getAuthorities();
+      this.isAdmin = roles && roles.includes('ROLE_ADMIN');
       this.isLogged = true;
     } else {
+      this.isAdmin = false;
       this.isLogged = false;
     }
   }
+
+   ngOnInit(): void {
+        this.cargarPersona();
+        this.VerificarPermisos();
+      }
 
   cargarPersona(){
     this.personaService.detail(1).subscribe(data =>

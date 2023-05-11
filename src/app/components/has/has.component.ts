@@ -13,16 +13,26 @@ export class HasComponent implements OnInit {
 
   constructor(private skillS: SkillService, private tokenService: TokenService) { }
   
-  isLogged= false; 
+  isLogged = false;
+  isAdmin = false;
 
-  ngOnInit(): void {
-    this.cargarSkills();
-    if(this.tokenService.getToken()){
+  VerificarPermisos(): void {
+    if (this.tokenService.getToken()) {
+      const token = this.tokenService.getToken();
+      const roles = this.tokenService.getAuthorities();
+      this.isAdmin = roles && roles.includes('ROLE_ADMIN');
       this.isLogged = true;
     } else {
+      this.isAdmin = false;
       this.isLogged = false;
     }
   }
+    
+
+      ngOnInit(): void {
+        this.cargarSkills();
+        this.VerificarPermisos();
+      }
 
   cargarSkills(): void{
     this.skillS.lista().subscribe(

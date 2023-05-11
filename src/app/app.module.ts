@@ -24,8 +24,11 @@ import { EditeducacionComponent } from './components/educacion/editeducacion.com
 import { EditSkilComponent } from './components/has/edit-skill.component';
 import { NewSkillComponent } from './components/has/new-skill.component';
 import { EditAcercaDeComponent } from './components/acerca-de/edit-acerca-de.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
- 
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,10 +57,13 @@ import { EditAcercaDeComponent } from './components/acerca-de/edit-acerca-de.com
     NgCircleProgressModule.forRoot({}),
     HttpClientModule,
     FormsModule,
-
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   providers: [
-    interceptorProvider
+    interceptorProvider,
+    JwtHelperService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }
   ],
   bootstrap: [AppComponent]
 })

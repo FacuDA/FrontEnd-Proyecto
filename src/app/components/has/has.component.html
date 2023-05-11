@@ -2,7 +2,7 @@
 
     <h1>Hard & Soft skills</h1>
     <div class="col-lg-2">
-        <button type="button" routerLink="/newskill" class="btn btn-dark" *ngIf="isLogged">Nueva Skill</button>
+        <button type="button" routerLink="/newskill" class="btn btn-dark" *ngIf="isLogged && isAdmin">Nueva Skill</button>
     </div>
 
 
@@ -27,11 +27,11 @@
         </circle-progress>
 
         <div>
-            <td *ngIf="isLogged">
+            <td *ngIf="isLogged && isAdmin">
                 <button class="btn btn-light" routerLink="/editskill/{{skill.id}}">
                     <i class="bi bi-pencil-fill"></i></button>
             </td>
-            <td *ngIf="isLogged">
+            <td *ngIf="isLogged && isAdmin ">
                 <button class="btn btn-danger" (click)="delete(skill.id)">
                     <i class="bi bi-trash-fill"></i></button>
             </td>

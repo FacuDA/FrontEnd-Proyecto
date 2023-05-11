@@ -1,7 +1,10 @@
+    <div>
+        <button type="button" class="btn btn-secondary" routerLink="/editacercade/1" *ngIf="isLogged && isAdmin">
+            Editar Persona
+         </button>
+    </div>
 <div class="row">
-        <button type="button" class="btn btn-secondary" routerLink="/editacercade/1" *ngIf="isLogged">
-           Editar Persona
-        </button>
+        
 
     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
         <img src= "{{persona.img}}" class="img-fluid" id="foto_de_perfil">

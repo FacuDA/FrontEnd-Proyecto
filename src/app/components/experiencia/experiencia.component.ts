@@ -13,18 +13,26 @@ export class ExperienciaComponent implements OnInit{
   
   constructor(private sExperiencia: SExperienciaService, private tokenService: TokenService) { }
 
-  isLogged = false 
+  isLogged = false;
+  isAdmin = false;
 
-  ngOnInit(): void {
-
-    this.cargarExperiencia();
-    
-    if(this.tokenService.getToken()){
+  VerificarPermisos(): void {
+    if (this.tokenService.getToken()) {
+      const token = this.tokenService.getToken();
+      const roles = this.tokenService.getAuthorities();
+      this.isAdmin = roles && roles.includes('ROLE_ADMIN');
       this.isLogged = true;
     } else {
+      this.isAdmin = false;
       this.isLogged = false;
     }
   }
+    
+
+      ngOnInit(): void {
+        this.cargarExperiencia();
+        this.VerificarPermisos();
+      }
 
   cargarExperiencia():void{
     this.sExperiencia.lista().subscribe(data =>{this.expe = data;})

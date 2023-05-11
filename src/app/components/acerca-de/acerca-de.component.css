@@ -8,12 +8,8 @@ div {
 /*photo style*/
 @media (min-width: 576px){
     #foto_de_perfil {
-        position: absolute;
-        width: 15%;
         border-radius: 30%;
         box-shadow: 3px 3px 3px grey;
-        left: 3%;
-        top: 600px;
     }
 }
 @media (max-width: 576px){

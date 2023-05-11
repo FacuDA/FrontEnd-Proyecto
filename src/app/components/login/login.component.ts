@@ -19,7 +19,9 @@ export class LoginComponent implements OnInit{
   roles: string[] = [];
   errMsj!: string;
 
-  constructor(private tokenService: TokenService, private authService: AuthService, private router: Router) { }
+  constructor(private tokenService: TokenService,
+     private authService: AuthService,
+      private router: Router) { }
 
   ngOnInit(): void {
   if (this.tokenService.getToken()){
